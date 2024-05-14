@@ -1,24 +1,23 @@
 function solution(X, Y) {
-  let answer = '-1';
   const xSet = new Set(X);
-  const ySet = new Set(Y);
-  const commonArray = [];
-  const count = {};
+  const commonArr = [];
 
-  X.split('').forEach((char) => {
-    count[char] = (count[char] || 0) + 1;
+  const count = new Map();
+  X.forEach((e) => {
+    count.set(e, (count.get(e) || 0) + 1);
   });
 
-  Y.split('').forEach((char) => {
-    if (xSet.has(char) && count[char] > 0) {
-      commonArray.push(char);
-      count[char]--;
+  Y.forEach((e) => {
+    if (xSet.has(e) && count.has(e) && count.get(e) > 0) {
+      commonArr.push(e);
+      count.set(e, count.get(e) - 1);
     }
   });
 
-  if (commonArray.length > 0) {
-    answer = commonArray.sort((a, b) => b - a).join('');
+  if (commonArr.length > 0) {
+    const sortedCommon = commonArr.sort((a, b) => b - a);
+    return sortedCommon.join('');
+  } else {
+    return '0';
   }
-
-  return !/^0*$/.test(answer) ? answer : '0';
 }
