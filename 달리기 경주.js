@@ -8,12 +8,12 @@ function solution(players, callings) {
 
   for (let j = 0; j < callings.length; j++) {
     const currentPlayer = callings[j];
-    const index = playerObj[currentPlayer];
+    const rank = playerObj[currentPlayer];
 
-    [players[index - 1], players[index]] = [players[index], players[index - 1]];
+    [players[rank - 1], players[rank]] = [players[rank], players[rank - 1]];
 
-    playerObj[currentPlayer] = index - 1;
-    playerObj[players[index]] = index;
+    playerObj[currentPlayer] = rank - 1;
+    playerObj[players[rank]] = rank;
   }
 
   return players;
